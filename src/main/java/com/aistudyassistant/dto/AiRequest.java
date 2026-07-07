@@ -1,4 +1,8 @@
 package com.aistudyassistant.dto;
 
-public class AiRequest {
-}
+import jakarta.validation.constraints.NotBlank;
+
+public record AiRequest(
+        @NotBlank(message = "Prompt cannot be empty")
+        String prompt
+) {}

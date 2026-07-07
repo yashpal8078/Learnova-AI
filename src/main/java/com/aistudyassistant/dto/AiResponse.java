@@ -1,4 +1,5 @@
 package com.aistudyassistant.dto;
 
-public class AiResponse {
-}
+public record AiResponse(
+        String response
+) {}

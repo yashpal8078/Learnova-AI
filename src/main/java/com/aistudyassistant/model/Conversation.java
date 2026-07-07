@@ -11,27 +11,30 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-@Table(name = "documents")
-public class Document {
+@Table(name = "conversations")
+public class Conversation {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String fileName;
-
-    private String filePath;
-    @Column(columnDefinition = "LONGTEXT")
-    private String extractedText;
+    private String title;
 
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
 
-    private LocalDateTime uploadedAt;
+    private LocalDateTime createdAt;
+    private LocalDateTime updatedAt;
 
     @PrePersist
     public void prePersist() {
-        this.uploadedAt = LocalDateTime.now();
+        this.createdAt = LocalDateTime.now();
+        this.updatedAt = LocalDateTime.now();
+    }
+
+    @PreUpdate
+    public void preUpdate() {
+        this.updatedAt = LocalDateTime.now();
     }
 }
